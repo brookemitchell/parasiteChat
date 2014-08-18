@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+ <script type="text/javascript">
+    var apiKey = '<%= apiKey %>';
+    var sessionId = '<%= sessionId %>';
+    var token = '<%= token %>';
+    var userNameList = '<%= userNameList %>';
+    console.log(userNameList);
+</script>
+
+      <script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
+      <script src="//static.opentok.com/webrtc/v2.2/js/opentok.min.js"></script>
+
+  <title>Parasite One</title>
+</head>
+
+<body>
+
+<!--Login Div -->
+
+  <div class="login page">
+      <h1 class="title">Your nickname?</h1>
+      <input class="userNameInput" type="text" maxlength="14" autofocus >
+      <h3 class="usersUpdate">There are currently <span class="usersNum"><%= numUsers %></span> users</h3>
+
+  </div>
+
+<!-- Main Chat Div  -->
+    <div class="chat page">
+
+      <section class="chatArea">
+        <ul class="messages"></ul>
+      </section>
+
+<!-- Videos Div  -->
+
+  <aside class="videoArea">
+    <div class="serverVideoBox vidBox">
+      <video class="serverVideo">A Video</video>
+    </div>
+
+    <div class="userVideoBox">
+        <div id="user0" class="vidBox"></div>
+        <div id="user1" class="vidBox"></div>
+        <div id="user2" class="vidBox"></div>
+        <div id="user3" class="vidBox"></div>
+        <div id="user4" class="vidBox"></div>
+        <div id="user5" class="vidBox"></div>
+        <div id="user6" class="vidBox"></div>
+        <div id="user7" class="vidBox"></div>
+        <div id="user8" class="vidBox"></div>
+
+    </div>
+
+  </aside>
+
+<!-- Text Input Box   -->
+
+  <footer class="messagePost">
+      <input class="inputMessage" placeholder="Type here..." autofocus >
+  </footer>
+
+
+<!-- End Chat Div  -->
+  </div>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/tokbox.js"></script>
+  <script src="js/main.js"></script>
+
+
+</body>
+
+</html>
