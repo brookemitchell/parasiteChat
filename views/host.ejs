@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 
   <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
-  <link rel="stylesheet" href="css/hostStyle.css">
+  <link rel="stylesheet" href="css/style.css">
 
  <script type="text/javascript">
     var apiKey = '<%= apiKey %>';
@@ -12,27 +12,16 @@
     var token = '<%= token %>';
 </script>
 
-      <script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
       <script src="//static.opentok.com/webrtc/v2.2/js/opentok.min.js"></script>
 
   <title>Parasite One</title>
 </head>
 
 <body>
-
-
-<!-- Main Chat Div  -->
-    <div class="chat page">
-
-      <section class="chatArea">
-        <ul class="messages"></ul>
-      </section>
-
 <!-- Videos Div  -->
 
-  <aside class="videoArea">
-    <div id="serverVideoBox" class="vidBox">
-      <video class="serverVideo">A Video</video>
+    <div class="serverVideoBox vidBox">
+      <div id="serverVid"></div>
     </div>
 
     <div class="userVideoBox">
@@ -48,22 +37,11 @@
 
     </div>
 
-  </aside>
 
-<!-- Text Input Box   -->
-
-  <footer class="messagePost">
-      <input class="inputMessage" placeholder="Type here..." autofocus >
-  </footer>
-
-
-<!-- End Chat Div  -->
-  </div>
 
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="js/tokbox.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/host.js"></script>
 
 
 </body>

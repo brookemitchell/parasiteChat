@@ -270,7 +270,6 @@ $(function() {
     console.log(stairNumber);
 
     // connect TokBox
-
     session.connect(token, function(error) {
       var settings = new TokSettings (userName);
       var publisher = OT.initPublisher('user' + stairNumber, settings);
@@ -292,8 +291,6 @@ $(function() {
 
     //B: login page update
     $('.usersNum').hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
-
-
   });
 
   // Whenever the server emits 'user left', log it in the chat body
@@ -317,18 +314,16 @@ $(function() {
     var joinerName = event.stream.name;
     var settings = new TokSettings(joinerName);
 
-    //console.log("New stream in the session: " + event.stream.streamId);
-
     console.log(joinerName + ' joined');
     var idToReplace = userNameList.indexOf(joinerName);
 
-    console.log(idToReplace + ' will be added');
-
-    if (event.stream.name == "Parasite"){
+    if (joinerName == 'Host'){
+      session.subscribe(event.stream, 'serverVid', settings);
+      console.log('adding to srver box');
     }
     else{
       session.subscribe(event.stream, 'user' + idToReplace, settings);
+      console.log('adding to user box');
     }
    });
-
 });

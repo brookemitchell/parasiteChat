@@ -26,15 +26,14 @@ $(function() {
     var typing = false;
     var lastTypingTime;
     var $currentInput = $userNameInput.focus();
-    var defaultSettings = {
-        insertMode: "append",
-        width: 200,
-        height: 150,
-        subscribeToAudio: true,
-        subscribeToVideo: true
+    var TokSettings = function(name) {
+        this.insertMode = "append";
+        this.width = 200;
+        this.height = 150;
+        this.subscribeToAudio = true;
+        this.subscribeToVideo = true;
+        this.name = name;
     };
-    var publishSettings = defaultSettings;
-    var subscribeSettings = defaultSettings;
     var socket = io();
     function addParticipantsMessage(data) {
         var message = "";
@@ -183,9 +182,9 @@ $(function() {
         console.log(userNameList);
         stairNumber = userNameList.indexOf(userName);
         console.log(stairNumber);
-        publishSettings.name = stairNumber + ": " + userName;
         session.connect(token, function(error) {
-            var publisher = OT.initPublisher("user" + stairNumber), publishSettings;
+            var settings = new TokSettings(userName);
+            var publisher = OT.initPublisher("user" + stairNumber, settings);
             session.publish(publisher);
         });
     });
@@ -208,5 +207,18 @@ $(function() {
     });
     socket.on("stop typing", function(data) {
         removeChatTyping(data);
+    });
+    session.on("streamCreated", function(event) {
+        var joinerName = event.stream.name;
+        var settings = new TokSettings(joinerName);
+        console.log(joinerName + " joined");
+        var idToReplace = userNameList.indexOf(joinerName);
+        if (joinerName == "Host") {
+            session.subscribe(event.stream, "serverVid", settings);
+            console.log("adding to srver box");
+        } else {
+            session.subscribe(event.stream, "user" + idToReplace, settings);
+            console.log("adding to user box");
+        }
     });
 });
