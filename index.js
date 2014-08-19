@@ -51,6 +51,7 @@ app.get('/host', function(req, res) {
         apiKey: apiKey,
         sessionId: sessionId,
         token: token,
+        userNameList: userNameList
   });
 });
 

@@ -14,7 +14,7 @@ $(function() {
 
   // Prompt for setting a username
   var userName = 'Host';
-  var userNameList = [];
+  var userNameList = '<%= userNameList %>';
 
 // TokBox Settings constructor
   var TokSettings = function ( name ) {
@@ -29,6 +29,7 @@ $(function() {
   var socket = io();
 
   session.on("streamCreated", function(event) {
+
     var joinerName = event.stream.name;
     var settings = new TokSettings(joinerName);
     console.log(joinerName + ' joined');
@@ -46,7 +47,7 @@ $(function() {
   //Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
     console.log(data.userName + ' joined');
-    console.log(data.userNameList);
+    userNameList = data.userNameList;
 
   });
 

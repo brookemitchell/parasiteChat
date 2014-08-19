@@ -6,7 +6,7 @@ $(function() {
     OT.setLogLevel(2);
     var $window = $(window);
     var userName = "Host";
-    var userNameList = [];
+    var userNameList = "<%= userNameList %>";
     var TokSettings = function(name) {
         this.insertMode = "append";
         this.width = 200;
@@ -31,6 +31,6 @@ $(function() {
     });
     socket.on("user joined", function(data) {
         console.log(data.userName + " joined");
-        console.log(data.userNameList);
+        userNameList = data.userNameList;
     });
 });

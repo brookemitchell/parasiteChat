@@ -45,9 +45,19 @@ app.get("/", function(req, res) {
     });
 });
 
+app.get("/host", function(req, res) {
+    token = opentok.generateToken(sessionId);
+    res.render("host.ejs", {
+        apiKey: apiKey,
+        sessionId: sessionId,
+        token: token,
+        userNameList: userNameList
+    });
+});
+
 function addToArrayRandom(name, array) {
     while (true) {
-        var randNum = getRandomInt(0, array.length);
+        var randNum = getRandomInt(0, array.length - 1);
         if (array[randNum] == null) {
             array[randNum] = name;
             break;

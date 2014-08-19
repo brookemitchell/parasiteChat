@@ -194,7 +194,8 @@ $(function() {
     socket.on("user joined", function(data) {
         log(data.userName + " joined");
         addParticipantsMessage(data);
-        console.log(data.userNameList);
+        userNameList = data.userNameList;
+        console.log(userNameList);
         $(".usersNum").hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
     });
     socket.on("user left", function(data) {
@@ -213,6 +214,7 @@ $(function() {
         var settings = new TokSettings(joinerName);
         console.log(joinerName + " joined");
         var idToReplace = userNameList.indexOf(joinerName);
+        console.log("user:" + idToReplace + " will be added");
         if (joinerName == "Host") {
             session.subscribe(event.stream, "serverVid", settings);
             console.log("adding to srver box");

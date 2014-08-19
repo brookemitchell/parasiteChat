@@ -287,7 +287,8 @@ $(function() {
   socket.on('user joined', function (data) {
     log(data.userName + ' joined');
     addParticipantsMessage(data);
-    console.log(data.userNameList);
+    userNameList = data.userNameList;
+    console.log(userNameList);
 
     //B: login page update
     $('.usersNum').hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
@@ -316,6 +317,7 @@ $(function() {
 
     console.log(joinerName + ' joined');
     var idToReplace = userNameList.indexOf(joinerName);
+    console.log('user:' + idToReplace + ' will be added');
 
     if (joinerName == 'Host'){
       session.subscribe(event.stream, 'serverVid', settings);
