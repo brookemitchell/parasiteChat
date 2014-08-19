@@ -43,7 +43,7 @@ app.get('/', function(req, res) {
   });
 });
 
-app.get('/host.html', function(req, res) {
+app.get('/host', function(req, res) {
 
       token = opentok.generateToken(sessionId);
 

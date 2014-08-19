@@ -37,17 +37,15 @@ $(function() {
   var $currentInput = $userNameInput.focus();
 
 
-// TokBox Settings
-  var defaultSettings = {
-      insertMode: "append",
-      width: 200,
-      height: 150,
-      subscribeToAudio:true,
-      subscribeToVideo:true
+// TokBox Settings constructor
+  var TokSettings = function ( name ) {
+      this.insertMode = "append";
+      this.width = 200;
+      this.height = 150;
+      this.subscribeToAudio = true;
+      this.subscribeToVideo = true;
+      this.name  = name;
     };
-
-  var publishSettings = defaultSettings;
-  var subscribeSettings = defaultSettings;
 
   var socket = io();
 
@@ -263,7 +261,7 @@ $(function() {
       prepend: true
     });
 
-    //Add number of users to log.
+    //Add number of users to log. BM: remove this?
     addParticipantsMessage(data);
     userNameList = data.userNameList;
     console.log(userName);
@@ -272,10 +270,10 @@ $(function() {
     console.log(stairNumber);
 
     // connect TokBox
-    publishSettings.name = stairNumber + ': ' + userName;
 
     session.connect(token, function(error) {
-      var publisher = OT.initPublisher('user' + stairNumber), publishSettings;
+      var settings = new TokSettings (userName);
+      var publisher = OT.initPublisher('user' + stairNumber, settings);
       session.publish(publisher);
 
     });
@@ -316,15 +314,20 @@ $(function() {
   });
 
   session.on("streamCreated", function(event) {
+    var joinerName = event.stream.name;
+    var settings = new TokSettings(joinerName);
 
-     console.log("New stream in the session: " + event.stream.streamId);
+    //console.log("New stream in the session: " + event.stream.streamId);
 
-// console.log(String(event.stream.name).charAt(0) + ' joined'); String(event.stream.name).charAt(0)
+    console.log(joinerName + ' joined');
+    var idToReplace = userNameList.indexOf(joinerName);
+
+    console.log(idToReplace + ' will be added');
 
     if (event.stream.name == "Parasite"){
     }
     else{
-      session.subscribe(event.stream, 'user0');
+      session.subscribe(event.stream, 'user' + idToReplace, settings);
     }
    });
 
