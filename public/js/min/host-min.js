@@ -33,4 +33,10 @@ $(function() {
         console.log(data.userName + " joined");
         userNameList = data.userNameList;
     });
+    socket.on("user hovOn", function(data) {
+        $("#user" + data).css("background", "red");
+    });
+    socket.on("user hovOff", function(data) {
+        $("#user" + data).css("background", "lightgrey");
+    });
 });

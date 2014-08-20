@@ -128,16 +128,12 @@ ul {
   height: 96.6%;
 }
 
-.installVideoBox {
-  height: 25%;
-}
-
-.userVideoBox {
+.userVideoBox #serverVidBox {
   top: 25%;
   height: 87%;
 }
 
-.vidBox {
+.vidBox, #serverVidBox {
   background: lightgrey;
   height: 150px;
   border-style: dashed;

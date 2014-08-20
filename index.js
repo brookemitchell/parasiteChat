@@ -148,4 +148,15 @@ io.on('connection', function (socket) {
       });
     }
   });
+
+  //bm: when user hovers over user video box.. broadcast to others
+
+  socket.on('hoverOn', function (hoverNum) {
+    socket.broadcast.emit('user hovOn', hoverNum);
+  });
+
+
+  socket.on('hoverOff', function (hoverNum) {
+    socket.broadcast.emit('user hovOff', hoverNum);
+  });
 });

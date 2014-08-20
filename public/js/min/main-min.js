@@ -170,6 +170,13 @@ $(function() {
     $inputMessage.click(function() {
         $inputMessage.focus();
     });
+    $(".vidBox").hover(function() {
+        $(this).css("background", "red");
+        socket.emit("hoverOn", this.id.charAt(4));
+    }, function() {
+        $(this).css("background", "lightgrey");
+        socket.emit("hoverOff", this.id.charAt(4));
+    });
     socket.on("login", function(data) {
         connected = true;
         var message = "Welcome to Parasite Chat " + data.userName + ".";
@@ -209,6 +216,12 @@ $(function() {
     socket.on("stop typing", function(data) {
         removeChatTyping(data);
     });
+    socket.on("user hovOn", function(data) {
+        $("#user" + data).css("background", "red");
+    });
+    socket.on("user hovOff", function(data) {
+        $("#user" + data).css("background", "lightgrey");
+    });
     session.on("streamCreated", function(event) {
         var joinerName = event.stream.name;
         var settings = new TokSettings(joinerName);
@@ -216,8 +229,8 @@ $(function() {
         var idToReplace = userNameList.indexOf(joinerName);
         console.log("user:" + idToReplace + " will be added");
         if (joinerName == "Host") {
-            session.subscribe(event.stream, "serverVid", settings);
-            console.log("adding to srver box");
+            session.subscribe(event.stream, "serverVidBox", settings);
+            console.log("adding to server box");
         } else {
             session.subscribe(event.stream, "user" + idToReplace, settings);
             console.log("adding to user box");

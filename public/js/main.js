@@ -250,6 +250,19 @@ $(function() {
     $inputMessage.focus();
   });
 
+  //Hover Events
+   //Emit an event to the server whenever a client hovers over a user video box.
+   $('.vidBox').hover( function(){
+     //console.log(this.id.charAt(4) + ' was hovered over' );
+     $( this ).css( 'background', 'red');
+     socket.emit('hoverOn', this.id.charAt(4));
+   },
+    function( ){
+      //console.log(this.id.charAt(4)  + ' was left');
+     $( this ).css( 'background', 'lightgrey');
+     socket.emit('hoverOff', this.id.charAt(4));
+    });
+
   // Socket events
 
   // Whenever the server emits 'login', log the login message
@@ -311,7 +324,14 @@ $(function() {
     removeChatTyping(data);
   });
 
-  session.on("streamCreated", function(event) {
+   socket.on('user hovOn', function (data) {
+     $( '#user' + data ).css( 'background', 'red');
+   });
+   socket.on('user hovOff', function (data) {
+     $( '#user' + data ).css( 'background', 'lightgrey');
+   });
+
+  session.on('streamCreated', function(event) {
     var joinerName = event.stream.name;
     var settings = new TokSettings(joinerName);
 
@@ -320,8 +340,8 @@ $(function() {
     console.log('user:' + idToReplace + ' will be added');
 
     if (joinerName == 'Host'){
-      session.subscribe(event.stream, 'serverVid', settings);
-      console.log('adding to srver box');
+      session.subscribe(event.stream, 'serverVidBox', settings);
+      console.log('adding to server box');
     }
     else{
       session.subscribe(event.stream, 'user' + idToReplace, settings);

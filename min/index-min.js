@@ -116,4 +116,10 @@ io.on("connection", function(socket) {
             });
         }
     });
+    socket.on("hoverOn", function(hoverNum) {
+        socket.broadcast.emit("user hovOn", hoverNum);
+    });
+    socket.on("hoverOff", function(hoverNum) {
+        socket.broadcast.emit("user hovOff", hoverNum);
+    });
 });
