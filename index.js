@@ -16,7 +16,7 @@ var sessionId = '2_MX40NDkxOTU0MX5-TW9uIEF1ZyAxMSAxNzo1MDo0NCBQRFQgMjAxNH4wLjAxM
 var apiKey = '44919541';
 var token;
 
-var board = new five.Board();
+var board = new five.Board({repl:false});
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
@@ -61,7 +61,7 @@ function addToArrayRandom( name, array ){
   while (true) {
 
     var randNum = getRandomInt(0, array.length - 1);
-    if (array[randNum] == null)
+    if (!array[randNum])
       {
         array[randNum] = name;
         break;
@@ -171,7 +171,6 @@ board.on('ready', function(){
 
 /*
 function ledToggle( pinNum, action){
-  
 
 }
 */

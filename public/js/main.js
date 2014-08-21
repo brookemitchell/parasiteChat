@@ -8,7 +8,7 @@ $(function() {
   ];
 
   var session = OT.initSession(apiKey, sessionId);
-  OT.setLogLevel(2);
+  OT.setLogLevel(4);
 
   var messagesRef = new Firebase('https://parasite.firebaseio.com/');
     messagesRef.limit(10).once('value', function (snapshot) {
@@ -36,15 +36,26 @@ $(function() {
   var lastTypingTime;
   var $currentInput = $userNameInput.focus();
 
+  //SudioCOntext
+  window.AudioContext = window.AudioContext || window.webkitAudioContext;
+  var context = new AudioContext();
 
 // TokBox Settings constructor
-  var TokSettings = function ( name ) {
+  var TokSettings = function ( name , resolution ) {
       this.insertMode = "append";
       this.width = 200;
       this.height = 150;
       this.subscribeToAudio = true;
       this.subscribeToVideo = true;
       this.name  = name;
+      //Valid values are "1280x720", "640x480", and "320x240".
+      this.resolution = resolution;
+      //style
+      this.style = {
+        buttonDisplayMode: 'off',
+        showSettingsButton: false,
+        showMicButton: false
+      };
     };
 
   var socket = io();
@@ -284,7 +295,7 @@ $(function() {
 
     // connect TokBox
     session.connect(token, function(error) {
-      var settings = new TokSettings (userName);
+      var settings = new TokSettings (userName, "320x240");
       var publisher = OT.initPublisher('user' + stairNumber, settings);
       session.publish(publisher);
 
@@ -333,17 +344,18 @@ $(function() {
 
   session.on('streamCreated', function(event) {
     var joinerName = event.stream.name;
-    var settings = new TokSettings(joinerName);
-
+    var setttings;
     console.log(joinerName + ' joined');
     var idToReplace = userNameList.indexOf(joinerName);
     console.log('user:' + idToReplace + ' will be added');
 
     if (joinerName == 'Host'){
+      settings = new TokSettings(joinerName, "1280x7200");
       session.subscribe(event.stream, 'serverVidBox', settings);
       console.log('adding to server box');
     }
     else{
+      settings = new TokSettings(joinerName, "320x240");
       session.subscribe(event.stream, 'user' + idToReplace, settings);
       console.log('adding to user box');
     }
