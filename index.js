@@ -17,7 +17,6 @@ var apiKey = '44919541';
 var token;
 
 var board = new five.Board();
-var led;
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
@@ -166,7 +165,7 @@ io.on('connection', function (socket) {
 });
 
 board.on('ready', function(){
-  led = new five.Led(13);
+  global.led = new five.Led(13);
   console.log('ready!');
 });
 
