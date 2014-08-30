@@ -1,5 +1,7 @@
 var port = process.env.PORT || 3e3;
 
+var five = require("johnny-five");
+
 var express = require("express");
 
 var app = express();
@@ -21,6 +23,10 @@ var sessionId = "2_MX40NDkxOTU0MX5-TW9uIEF1ZyAxMSAxNzo1MDo0NCBQRFQgMjAxNH4wLjAxM
 var apiKey = "44919541";
 
 var token;
+
+var board = new five.Board({
+    repl: false
+});
 
 server.listen(port, function() {
     console.log("Server listening at port %d", port);
@@ -58,7 +64,7 @@ app.get("/host", function(req, res) {
 function addToArrayRandom(name, array) {
     while (true) {
         var randNum = getRandomInt(0, array.length - 1);
-        if (array[randNum] == null) {
+        if (!array[randNum]) {
             array[randNum] = name;
             break;
         }
@@ -117,9 +123,22 @@ io.on("connection", function(socket) {
         }
     });
     socket.on("hoverOn", function(hoverNum) {
+        led.on();
         socket.broadcast.emit("user hovOn", hoverNum);
     });
     socket.on("hoverOff", function(hoverNum) {
+        led.off();
         socket.broadcast.emit("user hovOff", hoverNum);
     });
+    socket.on("inputVol", function(array) {
+        socket.broadcast.emit("userVol", array);
+    });
+    socket.on("servInputVol", function(vol) {
+        socket.broadcast.emit("servInputVol", vol);
+    });
+});
+
+board.on("ready", function() {
+    global.led = new five.Led(13);
+    console.log("ready!");
 });

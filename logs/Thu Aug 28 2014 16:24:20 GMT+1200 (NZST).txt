@@ -1,0 +1,26 @@
+Thu Aug 28 2014 16:24:58 : 1 loop on
+Thu Aug 28 2014 16:24:58 : 1 off
+Thu Aug 28 2014 16:25:00 : 1 loop on
+Thu Aug 28 2014 16:25:01 : 1 off
+Thu Aug 28 2014 16:25:01 : 1 loop on
+Thu Aug 28 2014 16:25:02 : 1 off
+Thu Aug 28 2014 16:25:03 : 1 loop on
+Thu Aug 28 2014 16:25:03 : 1 off
+Thu Aug 28 2014 16:25:03 : 0 loop on
+Thu Aug 28 2014 16:25:03 : 0 off
+Thu Aug 28 2014 16:25:13 : 3 loop on
+Thu Aug 28 2014 16:25:13 : 3 off
+Thu Aug 28 2014 16:25:22 : 4 loop on
+Thu Aug 28 2014 16:25:22 : 4 off
+Thu Aug 28 2014 16:25:23 : 4 loop on
+Thu Aug 28 2014 16:25:23 : 4 off
+Thu Aug 28 2014 16:25:23 : 4 loop on
+Thu Aug 28 2014 16:25:23 : 4 off
+Thu Aug 28 2014 16:25:24 : 4 loop on
+Thu Aug 28 2014 16:25:24 : 4 off
+Thu Aug 28 2014 16:25:24 : 3 loop on
+Thu Aug 28 2014 16:25:25 : 3 off
+Thu Aug 28 2014 16:25:25 : 3 loop on
+Thu Aug 28 2014 16:25:26 : 3 off
+Thu Aug 28 2014 16:25:26 : 2 loop on
+Thu Aug 28 2014 16:25:26 : 2 off

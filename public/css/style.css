@@ -23,10 +23,8 @@ video {
 
 meter {
   position: absolute;
-  right: -26%;
-  bottom: 45%;
-  transform: rotate(-90deg);
-  width: 62%;
+  bottom: 0;
+  width: 100%;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

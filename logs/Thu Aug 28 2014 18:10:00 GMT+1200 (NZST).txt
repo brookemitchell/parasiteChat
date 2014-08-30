@@ -1,0 +1,146 @@
+Thu Aug 28 2014 18:10:06 : 2 loop on
+Thu Aug 28 2014 18:10:06 : 2 off
+Thu Aug 28 2014 18:10:07 : 2 loop on
+Thu Aug 28 2014 18:10:08 : 2 off
+Thu Aug 28 2014 18:10:09 : 4 loop on
+Thu Aug 28 2014 18:10:10 : 4 off
+Thu Aug 28 2014 18:10:10 : 3 loop on
+Thu Aug 28 2014 18:10:10 : 3 off
+Thu Aug 28 2014 18:10:10 : 2 loop on
+Thu Aug 28 2014 18:10:11 : 2 off
+Thu Aug 28 2014 18:10:11 : 1 loop on
+Thu Aug 28 2014 18:10:12 : 1 off
+Thu Aug 28 2014 18:10:12 : 2 loop on
+Thu Aug 28 2014 18:10:12 : 2 off
+Thu Aug 28 2014 18:10:12 : 2 loop on
+Thu Aug 28 2014 18:10:13 : 2 off
+Thu Aug 28 2014 18:10:13 : 4 loop on
+Thu Aug 28 2014 18:10:13 : 4 off
+Thu Aug 28 2014 18:10:14 : 3 loop on
+Thu Aug 28 2014 18:10:14 : 3 off
+Thu Aug 28 2014 18:10:15 : 3 loop on
+Thu Aug 28 2014 18:10:15 : 3 off
+Thu Aug 28 2014 18:10:15 : 3 loop on
+Thu Aug 28 2014 18:10:15 : 3 off
+Thu Aug 28 2014 18:10:15 : 3 loop on
+Thu Aug 28 2014 18:10:15 : 3 off
+Thu Aug 28 2014 18:10:16 : 3 loop on
+Thu Aug 28 2014 18:10:16 : 3 off
+Thu Aug 28 2014 18:10:41 : 3 loop on
+Thu Aug 28 2014 18:10:42 : 3 off
+Thu Aug 28 2014 18:10:42 : 3 loop on
+Thu Aug 28 2014 18:10:42 : 3 off
+Thu Aug 28 2014 18:10:42 : 2 loop on
+Thu Aug 28 2014 18:10:43 : 2 off
+Thu Aug 28 2014 18:10:43 : 1 loop on
+Thu Aug 28 2014 18:10:44 : 1 off
+Thu Aug 28 2014 18:10:44 : 2 loop on
+Thu Aug 28 2014 18:10:44 : 2 off
+Thu Aug 28 2014 18:10:45 : 3 loop on
+Thu Aug 28 2014 18:10:50 : 3 off
+Thu Aug 28 2014 18:10:51 : 3 loop on
+Thu Aug 28 2014 18:10:51 : 3 off
+Thu Aug 28 2014 18:10:51 : 3 loop on
+Thu Aug 28 2014 18:10:52 : 3 off
+Thu Aug 28 2014 18:10:52 : 2 loop on
+Thu Aug 28 2014 18:10:53 : 2 off
+Thu Aug 28 2014 18:10:53 : 2 loop on
+Thu Aug 28 2014 18:10:53 : 2 off
+Thu Aug 28 2014 18:10:53 : 2 loop on
+Thu Aug 28 2014 18:10:54 : 2 off
+Thu Aug 28 2014 18:10:56 : 2 loop on
+Thu Aug 28 2014 18:10:56 : 2 off
+Thu Aug 28 2014 18:10:56 : 3 loop on
+Thu Aug 28 2014 18:10:56 : 3 off
+Thu Aug 28 2014 18:10:56 : 3 loop on
+Thu Aug 28 2014 18:10:59 : 3 off
+Thu Aug 28 2014 18:10:59 : 3 loop on
+Thu Aug 28 2014 18:11:00 : 3 off
+Thu Aug 28 2014 18:11:00 : 3 loop on
+Thu Aug 28 2014 18:11:00 : 3 off
+Thu Aug 28 2014 18:11:00 : 3 loop on
+Thu Aug 28 2014 18:11:00 : 3 off
+Thu Aug 28 2014 18:11:00 : 3 loop on
+Thu Aug 28 2014 18:11:01 : 3 off
+Thu Aug 28 2014 18:11:01 : 4 loop on
+Thu Aug 28 2014 18:11:02 : 4 off
+Thu Aug 28 2014 18:11:02 : 4 loop on
+Thu Aug 28 2014 18:11:05 : 4 off
+Thu Aug 28 2014 18:11:10 : 4 loop on
+Thu Aug 28 2014 18:11:11 : 4 off
+Thu Aug 28 2014 18:11:11 : 4 loop on
+Thu Aug 28 2014 18:11:12 : 4 off
+Thu Aug 28 2014 18:11:12 : 3 loop on
+Thu Aug 28 2014 18:11:12 : 3 off
+Thu Aug 28 2014 18:11:12 : 2 loop on
+Thu Aug 28 2014 18:11:13 : 2 off
+Thu Aug 28 2014 18:11:13 : 2 loop on
+Thu Aug 28 2014 18:11:13 : 2 off
+Thu Aug 28 2014 18:11:14 : 3 loop on
+Thu Aug 28 2014 18:11:15 : 3 off
+Thu Aug 28 2014 18:11:15 : 3 loop on
+Thu Aug 28 2014 18:11:15 : 3 off
+Thu Aug 28 2014 18:11:15 : 3 loop on
+Thu Aug 28 2014 18:11:15 : 3 off
+Thu Aug 28 2014 18:11:16 : 3 loop on
+Thu Aug 28 2014 18:11:16 : 3 off
+Thu Aug 28 2014 18:11:16 : 3 loop on
+Thu Aug 28 2014 18:11:16 : 3 off
+Thu Aug 28 2014 18:11:17 : 3 loop on
+Thu Aug 28 2014 18:11:17 : 3 off
+Thu Aug 28 2014 18:11:18 : 2 loop on
+Thu Aug 28 2014 18:11:18 : 2 off
+Thu Aug 28 2014 18:11:19 : 2 loop on
+Thu Aug 28 2014 18:11:19 : 2 off
+Thu Aug 28 2014 18:11:19 : 2 loop on
+Thu Aug 28 2014 18:11:19 : 2 off
+Thu Aug 28 2014 18:11:19 : 2 loop on
+Thu Aug 28 2014 18:11:20 : 2 off
+Thu Aug 28 2014 18:11:20 : 2 loop on
+Thu Aug 28 2014 18:11:21 : 2 off
+Thu Aug 28 2014 18:11:21 : 2 loop on
+Thu Aug 28 2014 18:11:21 : 2 off
+Thu Aug 28 2014 18:11:22 : 2 loop on
+Thu Aug 28 2014 18:11:26 : 2 off
+Thu Aug 28 2014 18:11:27 : 2 loop on
+Thu Aug 28 2014 18:11:27 : 2 off
+Thu Aug 28 2014 18:11:28 : 2 loop on
+Thu Aug 28 2014 18:11:28 : 2 off
+Thu Aug 28 2014 18:11:33 : 2 loop on
+Thu Aug 28 2014 18:11:33 : 2 off
+Thu Aug 28 2014 18:11:38 : 2 loop on
+Thu Aug 28 2014 18:12:05 : 2 off
+Thu Aug 28 2014 18:12:05 : 2 loop on
+Thu Aug 28 2014 18:12:06 : 2 off
+Thu Aug 28 2014 18:12:06 : 2 loop on
+Thu Aug 28 2014 18:12:06 : 2 off
+Thu Aug 28 2014 18:12:06 : 2 loop on
+Thu Aug 28 2014 18:12:07 : 2 off
+Thu Aug 28 2014 18:12:07 : 2 loop on
+Thu Aug 28 2014 18:12:07 : 2 off
+Thu Aug 28 2014 18:12:08 : 2 loop on
+Thu Aug 28 2014 18:12:08 : 2 off
+Thu Aug 28 2014 18:12:09 : 2 loop on
+Thu Aug 28 2014 18:12:09 : 2 off
+Thu Aug 28 2014 18:12:09 : 3 loop on
+Thu Aug 28 2014 18:12:10 : 3 off
+Thu Aug 28 2014 18:12:10 : 4 loop on
+Thu Aug 28 2014 18:12:10 : 4 off
+Thu Aug 28 2014 18:12:10 : 5 loop on
+Thu Aug 28 2014 18:12:11 : 5 off
+Thu Aug 28 2014 18:12:11 : 4 loop on
+Thu Aug 28 2014 18:12:11 : 4 off
+Thu Aug 28 2014 18:12:11 : 3 loop on
+Thu Aug 28 2014 18:12:11 : 3 off
+Thu Aug 28 2014 18:12:11 : 2 loop on
+Thu Aug 28 2014 18:12:11 : 2 off
+Thu Aug 28 2014 18:12:11 : 3 loop on
+Thu Aug 28 2014 18:12:12 : 3 off
+Thu Aug 28 2014 18:12:12 : 4 loop on
+Thu Aug 28 2014 18:12:12 : 4 off
+Thu Aug 28 2014 18:12:12 : 3 loop on
+Thu Aug 28 2014 18:12:12 : 3 off
+Thu Aug 28 2014 18:12:12 : 2 loop on
+Thu Aug 28 2014 18:12:12 : 2 off
+Thu Aug 28 2014 18:12:12 : 3 loop on
+Thu Aug 28 2014 18:12:22 : 3 off

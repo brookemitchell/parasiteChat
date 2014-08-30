@@ -15,105 +15,63 @@ body {
       sans-serif;
 */ }
 
+.videos {
+  width: 50%; }
+
 video {
   width: 100%    !important;
   height: auto   !important; }
+
+meter {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  z-index: 1; }
+
+meter::-webkit-meter-bar {
+  background: #EEE;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2) inset;
+  border-radius: 3px; }
+
+meter::-webkit-meter-optimum-value {
+  background: #86CC00;
+  /* Green */
+  border-radius: 3px; }
+
+meter::-webkit-meter-suboptimum-value {
+  background: #FFDB1A;
+  /* Yellow */
+  border-radius: 3px; }
+
+meter::-webkit-meter-even-less-good-value {
+  background: #CC4600;
+  /* Red */
+  border-radius: 3px; }
 
 .page {
   position: absolute;
   height: 100%;
   width: 100%; }
 
-/* Login Page */
-.login {
-  background-color: #534d4d;
-  font-size: 1.5em;
-  width: 100%;
-  position: fixed;
-  text-align: center; }
-  .login .userNameInput {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #fff;
-    outline: none;
-    padding-bottom: 2.5px;
-    text-align: center;
-    width: 50%;
-    letter-spacing: .05em; }
-  .login .title, .login .userNameInput, .login .usersUpdate {
-    color: #fff;
-    font-weight: lighter; }
-
-/* Chat page */
-ul {
-  list-style: none outside none; }
-
-.log + .message {
-  padding-top: 1em; }
-
-.message + .log {
-  padding-top: 1em; }
-
-.log {
-  color: gray;
-  font-size: 82%;
-  text-align: center; }
-
-/* Messages */
-.chatArea {
-  width: 70%;
-  height: 95.8%; }
-
-.messages {
-  height: 100%;
-  padding: 0px 0px 0px 3.5%;
-  margin-bottom: 0px;
-  overflow: scroll; }
-
-.messageBody {
-  padding-left: 0.9%; }
-
-.message.typing {
-  color: gray; }
-
-.userName {
-  overflow: hidden;
-  font-weight: 400; }
-
-/* Input */
-.messagePost {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  padding: 0.3% 0 0.2% 0;
-  border-top: 0.1em dotted black;
-  background: white; }
-
-.inputMessage {
-  padding-left: 1%;
-  height: 100%;
-  width: 90%;
-  outline: none;
-  border-width: 0; }
-
 /* Video Area */
 .videoArea {
   margin: 0;
   position: absolute;
   top: 0;
-  left: 70%;
-  width: 29%;
+  right: 0.7%;
+  width: 22%;
   height: 96.6%; }
 
-.installVideoBox {
-  height: 25%; }
-
-.userVideoBox {
+.userVideoBox #serverVidBox {
   top: 25%;
   height: 87%; }
 
-.vidBox {
+.vidBox, #serverVidBox {
+  position: relative;
   background: lightgrey;
   height: 150px;
   border-style: dashed;

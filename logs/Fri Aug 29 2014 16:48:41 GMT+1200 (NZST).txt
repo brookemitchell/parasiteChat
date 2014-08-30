@@ -1,0 +1,20 @@
+Fri Aug 29 2014 16:49:17 : 5 loop on
+Fri Aug 29 2014 16:49:17 : 5 off
+Fri Aug 29 2014 16:49:25 : 1 loop on
+Fri Aug 29 2014 16:49:27 : 1 off
+Fri Aug 29 2014 16:49:41 : 1 loop on
+Fri Aug 29 2014 16:49:41 : 1 off
+Fri Aug 29 2014 16:49:41 GMT+1200 (NZST): 2 archive on
+Fri Aug 29 2014 16:49:42 : 2 off
+Fri Aug 29 2014 16:49:42 : 1 loop on
+Fri Aug 29 2014 16:49:42 : 1 off
+Fri Aug 29 2014 16:49:49 : 1 loop on
+Fri Aug 29 2014 16:49:49 : 1 off
+Fri Aug 29 2014 16:49:49 GMT+1200 (NZST): 2 archive on
+Fri Aug 29 2014 16:49:50 : 2 off
+Fri Aug 29 2014 16:49:50 : 3 loop on
+Fri Aug 29 2014 16:49:50 : 3 off
+Fri Aug 29 2014 16:49:50 : 1 loop on
+Fri Aug 29 2014 16:49:50 : 1 off
+Fri Aug 29 2014 16:51:36 GMT+1200 (NZST): 2 archive on
+Fri Aug 29 2014 16:51:36 : 2 off

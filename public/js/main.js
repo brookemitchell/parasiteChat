@@ -17,14 +17,34 @@ $(function() {
       });
     });
 
+    var tokStyle = {
+        buttonDisplayMode: 'off',
+        showSettingsButton: false,
+        showMicButton: false
+      };
+
+
+// TokBox Settings constructor
+  var TokSettings = function ( name , resolution, audio ) {
+      this.insertMode = "append";
+      this.frameRate = 15;
+      this.width = 229;
+      this.height = 136;
+      this.name  = name;
+      //Valid values are "1280x720", "640x480", and "320x240".
+      this.resolution = resolution;
+      //style
+      this.style =  tokStyle;
+  };
+
   // Initialize varibles
   var $window = $(window);
   var $userNameInput = $('.userNameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
-
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
+  var socket = io();
 
   // Prompt for setting a username
   var userName;
@@ -36,29 +56,85 @@ $(function() {
   var lastTypingTime;
   var $currentInput = $userNameInput.focus();
 
-  //SudioCOntext
+  //Audio API Stuff
+  var audioContext = null;
+  var analyser = null;
+  var meter = null;
+  var inputVol = null;
+  // monkeypatch Web Audio
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
-  var context = new AudioContext();
+  // grab an audio context
+  audioContext = new AudioContext();
 
-// TokBox Settings constructor
-  var TokSettings = function ( name , resolution ) {
-      this.insertMode = "append";
-      this.width = 200;
-      this.height = 150;
-      this.subscribeToAudio = true;
-      this.subscribeToVideo = true;
-      this.name  = name;
-      //Valid values are "1280x720", "640x480", and "320x240".
-      this.resolution = resolution;
-      //style
-      this.style = {
-        buttonDisplayMode: 'off',
-        showSettingsButton: false,
-        showMicButton: false
-      };
-    };
+  // Attempt to get audio input
+  var getMic = function () {
+    try {
+    // monkeypatch getUserMedia
+          navigator.getUserMedia =
+          navigator.getUserMedia ||
+          navigator.webkitGetUserMedia ||
+          navigator.mozGetUserMedia;
+  // ask for an audio input
+  navigator.getUserMedia({audio:true, video:true}, gotStream, didntGetStream);
+  } catch (e) {
+  alert('getUserMedia threw exception :' + e);
+   }
+  };
 
-  var socket = io();
+  var volumeAudioProcess = function() {
+    var array =  new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(array);
+    inputVol = getAverageVolume(array);
+    //console.log(this.volume);
+
+    if (stairNumber){
+      $('#meter' + stairNumber).attr('value', inputVol);
+      // setInterval(function(){
+        // socket.emit('inputVol', [stairNumber, inputVol]);
+      // }, 100);
+    }
+  };
+
+  function didntGetStream() {
+    alert('Stream generation failed.');
+  }
+
+  function gotStream (stream) {
+  //console.log('got audio stream');
+    var mediaStreamSource = audioContext.createMediaStreamSource(stream);
+    meter = createAudioMeter(audioContext);
+    mediaStreamSource.connect(meter);
+    //console.log(meter);
+  }
+
+  function createAudioMeter (audioContext) {
+    // setup a javascript node
+    var javascriptNode = audioContext.createScriptProcessor(4096);
+    // this will have no effect, since we don't copy the input to the output,
+    // but works around a current Chrome bug.
+    javascriptNode.connect(audioContext.destination);
+    //patch to our metering function
+    javascriptNode.onaudioprocess = volumeAudioProcess;
+    //setup an analyser
+    analyser = audioContext.createAnalyser();
+    analyser.smoothingTimeConstant = 0.3;
+    analyser.fftSize = 2048;
+    //send anal to java node
+    analyser.connect(javascriptNode);
+    return analyser;
+  }
+
+  function getAverageVolume(array) {
+    var values = 0;
+    var average;
+    var length = array.length;
+    //get all the frequency amplitudes
+    for (var i = 0; i < length; i++) {
+        values += array[i];
+    }
+    average = Math.round(values / length);
+    return average;
+  }
 
   function addParticipantsMessage (data) {
     var message = '';
@@ -86,7 +162,6 @@ $(function() {
       socket.emit('add user', userName);
         }
     }
-
 
   // Sends a chat message
   function sendMessage () {
@@ -264,12 +339,10 @@ $(function() {
   //Hover Events
    //Emit an event to the server whenever a client hovers over a user video box.
    $('.vidBox').hover( function(){
-     //console.log(this.id.charAt(4) + ' was hovered over' );
      $( this ).css( 'background', 'red');
      socket.emit('hoverOn', this.id.charAt(4));
    },
     function( ){
-      //console.log(this.id.charAt(4)  + ' was left');
      $( this ).css( 'background', 'lightgrey');
      socket.emit('hoverOff', this.id.charAt(4));
     });
@@ -295,6 +368,7 @@ $(function() {
 
     // connect TokBox
     session.connect(token, function(error) {
+      getMic();
       var settings = new TokSettings (userName, "320x240");
       var publisher = OT.initPublisher('user' + stairNumber, settings);
       session.publish(publisher);
@@ -323,6 +397,8 @@ $(function() {
     log(data.userName + ' left');
     addParticipantsMessage(data);
     removeChatTyping(data);
+    $('.usersNum').hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
+    // $('#meter' + userNameList.indexOf(data.userName)).attr('value', 0);
   });
 
   // Whenever the server emits 'typing', show the typing message
@@ -335,12 +411,18 @@ $(function() {
     removeChatTyping(data);
   });
 
-   socket.on('user hovOn', function (data) {
-     $( '#user' + data ).css( 'background', 'red');
-   });
-   socket.on('user hovOff', function (data) {
+  socket.on('user hovOn', function (data) {
+    $( '#user' + data ).css( 'background', 'red');
+  });
+  socket.on('user hovOff', function (data) {
      $( '#user' + data ).css( 'background', 'lightgrey');
-   });
+  });
+  socket.on('userVol', function(array){
+    $('#meter' + array[0]).attr('value', array[1]);
+  });
+  socket.on('servInputVol', function(vol){
+    $('#meter-1').attr('vadafue', vol);
+  });
 
   session.on('streamCreated', function(event) {
     var joinerName = event.stream.name;
@@ -350,12 +432,13 @@ $(function() {
     console.log('user:' + idToReplace + ' will be added');
 
     if (joinerName == 'Host'){
-      settings = new TokSettings(joinerName, "1280x7200");
+      settings = new TokSettings(joinerName, "640x480", true);
       session.subscribe(event.stream, 'serverVidBox', settings);
       console.log('adding to server box');
     }
     else{
-      settings = new TokSettings(joinerName, "320x240");
+      settings = new TokSettings(joinerName, "320x240", false);
+      console.log(settings);
       session.subscribe(event.stream, 'user' + idToReplace, settings);
       console.log('adding to user box');
     }

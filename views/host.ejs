@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
 
   <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/hostStyle.css">
 
  <script type="text/javascript">
     var apiKey = '<%= apiKey %>';
     var sessionId = '<%= sessionId %>';
     var token = '<%= token %>';
+    var userNameList = '<%= userNameList %>';
 </script>
 
       <script src="//static.opentok.com/webrtc/v2.2/js/opentok.min.js"></script>
@@ -19,30 +20,27 @@
 
 <body>
 <!-- Videos Div  -->
-
+<section class="videos">
     <div class="serverVideoBox vidBox">
-      <div id="serverVid"></div>
+      <div id="serverVid"><meter id="meter-1" min=0 max=50 value=0></meter></div>
     </div>
 
     <div class="userVideoBox">
-        <div id="user0" class="vidBox"></div>
-        <div id="user1" class="vidBox"></div>
-        <div id="user2" class="vidBox"></div>
-        <div id="user3" class="vidBox"></div>
-        <div id="user4" class="vidBox"></div>
-        <div id="user5" class="vidBox"></div>
-        <div id="user6" class="vidBox"></div>
-        <div id="user7" class="vidBox"></div>
-        <div id="user8" class="vidBox"></div>
-
+      <div id="user0" class="vidBox"><meter id="meter0" min=0 max=50 value=0></meter></div>
+      <div id="user1" class="vidBox"><meter id="meter1" min=0 max=50 value=0></meter></div>
+      <div id="user2" class="vidBox"><meter id="meter2" min=0 max=50 value=0></meter></div>
+      <div id="user3" class="vidBox"><meter id="meter3" min=0 max=50 value=0></meter></div>
+      <div id="user4" class="vidBox"><meter id="meter4" min=0 max=50 value=0></meter></div>
+      <div id="user5" class="vidBox"><meter id="meter5" min=0 max=50 value=0></meter></div>
+      <div id="user6" class="vidBox"><meter id="meter6" min=0 max=50 value=0></meter></div>
+      <div id="user7" class="vidBox"><meter id="meter7" min=0 max=50 value=0></meter></div>
+      <div id="user8" class="vidBox"><meter id="meter8" min=0 max=50 value=0></meter></div>
     </div>
-
-
+  </section>
 
   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/host.js"></script>
-
 
 </body>
 

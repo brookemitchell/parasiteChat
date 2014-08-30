@@ -3,7 +3,7 @@ $(function() {
     var TYPING_TIMER_LENGTH = 400;
     var COLORS = [ "#e21400", "#91580f", "#f8a700", "#f78b00", "#58dc00", "#287b00", "#a8f07a", "#4ae8c4", "#3b88eb", "#3824aa", "#a700ff", "#d300e7" ];
     var session = OT.initSession(apiKey, sessionId);
-    OT.setLogLevel(2);
+    OT.setLogLevel(4);
     var messagesRef = new Firebase("https://parasite.firebaseio.com/");
     messagesRef.limit(10).once("value", function(snapshot) {
         snapshot.forEach(function(children) {
@@ -12,12 +12,27 @@ $(function() {
             });
         });
     });
+    var tokStyle = {
+        buttonDisplayMode: "off",
+        showSettingsButton: false,
+        showMicButton: false
+    };
+    var TokSettings = function(name, resolution, audio) {
+        this.insertMode = "append";
+        this.frameRate = 15;
+        this.width = 229;
+        this.height = 136;
+        this.name = name;
+        this.resolution = resolution;
+        this.style = tokStyle;
+    };
     var $window = $(window);
     var $userNameInput = $(".userNameInput");
     var $messages = $(".messages");
     var $inputMessage = $(".inputMessage");
     var $loginPage = $(".login.page");
     var $chatPage = $(".chat.page");
+    var socket = io();
     var userName;
     var userNameList;
     var numUsers;
@@ -26,15 +41,59 @@ $(function() {
     var typing = false;
     var lastTypingTime;
     var $currentInput = $userNameInput.focus();
-    var TokSettings = function(name) {
-        this.insertMode = "append";
-        this.width = 200;
-        this.height = 150;
-        this.subscribeToAudio = true;
-        this.subscribeToVideo = true;
-        this.name = name;
+    var audioContext = null;
+    var analyser = null;
+    var meter = null;
+    var inputVol = null;
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    audioContext = new AudioContext();
+    var getMic = function() {
+        try {
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+            navigator.getUserMedia({
+                audio: true,
+                video: true
+            }, gotStream, didntGetStream);
+        } catch (e) {
+            alert("getUserMedia threw exception :" + e);
+        }
     };
-    var socket = io();
+    var volumeAudioProcess = function() {
+        var array = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(array);
+        inputVol = getAverageVolume(array);
+        if (stairNumber) {
+            $("#meter" + stairNumber).attr("value", inputVol);
+        }
+    };
+    function didntGetStream() {
+        alert("Stream generation failed.");
+    }
+    function gotStream(stream) {
+        var mediaStreamSource = audioContext.createMediaStreamSource(stream);
+        meter = createAudioMeter(audioContext);
+        mediaStreamSource.connect(meter);
+    }
+    function createAudioMeter(audioContext) {
+        var javascriptNode = audioContext.createScriptProcessor(4096);
+        javascriptNode.connect(audioContext.destination);
+        javascriptNode.onaudioprocess = volumeAudioProcess;
+        analyser = audioContext.createAnalyser();
+        analyser.smoothingTimeConstant = .3;
+        analyser.fftSize = 2048;
+        analyser.connect(javascriptNode);
+        return analyser;
+    }
+    function getAverageVolume(array) {
+        var values = 0;
+        var average;
+        var length = array.length;
+        for (var i = 0; i < length; i++) {
+            values += array[i];
+        }
+        average = Math.round(values / length);
+        return average;
+    }
     function addParticipantsMessage(data) {
         var message = "";
         if (data.numUsers === 1) {
@@ -190,7 +249,8 @@ $(function() {
         stairNumber = userNameList.indexOf(userName);
         console.log(stairNumber);
         session.connect(token, function(error) {
-            var settings = new TokSettings(userName);
+            getMic();
+            var settings = new TokSettings(userName, "320x240");
             var publisher = OT.initPublisher("user" + stairNumber, settings);
             session.publish(publisher);
         });
@@ -209,6 +269,8 @@ $(function() {
         log(data.userName + " left");
         addParticipantsMessage(data);
         removeChatTyping(data);
+        $(".usersNum").hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
+        $("#meter" + userNameList.indexOf(data.userName)).attr("value", 0);
     });
     socket.on("typing", function(data) {
         addChatTyping(data);
@@ -222,16 +284,25 @@ $(function() {
     socket.on("user hovOff", function(data) {
         $("#user" + data).css("background", "lightgrey");
     });
+    socket.on("userVol", function(array) {
+        $("#meter" + array[0]).attr("value", array[1]);
+    });
+    socket.on("servInputVol", function(vol) {
+        $("#meter-1").attr("vadafue", vol);
+    });
     session.on("streamCreated", function(event) {
         var joinerName = event.stream.name;
-        var settings = new TokSettings(joinerName);
+        var setttings;
         console.log(joinerName + " joined");
         var idToReplace = userNameList.indexOf(joinerName);
         console.log("user:" + idToReplace + " will be added");
         if (joinerName == "Host") {
+            settings = new TokSettings(joinerName, "640x480", true);
             session.subscribe(event.stream, "serverVidBox", settings);
             console.log("adding to server box");
         } else {
+            settings = new TokSettings(joinerName, "320x240", false);
+            console.log(settings);
             session.subscribe(event.stream, "user" + idToReplace, settings);
             console.log("adding to user box");
         }
