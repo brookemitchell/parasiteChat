@@ -21,7 +21,7 @@ var apiKey = '44919541';
 var token;
 var hoverNums = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-var board = new five.Board({repl:false});
+// var board = new five.Board({repl:false});
 
 server.listen(port, function () {
   console.log('Server listening at port %d', port);
@@ -172,20 +172,17 @@ io.on('connection', function (socket) {
     }
   });
 
-
   //bm: when user hovers over user video box.. broadcast to others
   socket.on('hoverOn', function (hoverNum) {
     hoverNum = Number(hoverNum);
     var now = new Date();
         hoverNums[hoverNum]++;
     if (hoverNums[hoverNum] === 1){
-      // console.log(userNameList[hoverNum]);
       if (userNameList[hoverNum] === (null || undefined)){
         loggi.write(now.toLocaleString().slice(0, -15) + ': ' + hoverNum + ' loop on\n');
       }
       else loggi.write(now.toLocaleString() + ': ' + hoverNum + ' archive on\n');
-        global['l' + hoverNum].on();
-      // socket.broadcast.emit('server hovOn', hoverNums);
+        // global['l' + hoverNum].on();
     }
       socket.broadcast.emit('user hovOn', hoverNum);
   });
@@ -195,15 +192,12 @@ io.on('connection', function (socket) {
       hoverNums[hoverNum]--;
     if (hoverNums[hoverNum] === 0){
       loggi.write(now.toLocaleString().slice(0, -15) + ': ' + hoverNum + ' off\n');
-      // led.off();
-        global['l' + hoverNum].off();
-      // socket.broadcast.emit('server hovOff', hoverNums);
+      // global['l' + hoverNum].off();
     }
       socket.broadcast.emit('user hovOff', hoverNum);
   });
 
   socket.on('inputVol', function (array){
-    //console.log(array);
     socket.broadcast.emit('userVol', array);
   });
 
@@ -211,7 +205,7 @@ io.on('connection', function (socket) {
     socket.broadcast.emit('servInputVol', vol);
   });
 });
-
+/*
 board.on('ready', function(){
    for (var i = 0; i < 8; i++){
     switch (i){
@@ -309,4 +303,4 @@ board.on('ready', function(){
     io.sockets.emit('user hovOff', 7);
   });
 });
-
+*/

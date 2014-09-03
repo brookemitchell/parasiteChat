@@ -102,12 +102,19 @@ $(function() {
   }
 
   //play sudio files when no one is connected
-  var gainNodes = new Array(9);
-  var sourceNodes = new Array(9);
+  var gainNodes = new Array(8);
+  var sourceNodes = new Array(8);
 
   //setup the sounds
   setupAudioNodes();
   loadSounds('sounds/sound0.wav', 0);
+  loadSounds('sounds/sound1.wav', 1);
+  loadSounds('sounds/sound2.wav', 2);
+  loadSounds('sounds/sound3.wav', 3);
+  loadSounds('sounds/sound4.wav', 4);
+  loadSounds('sounds/sound5.wav', 5);
+  loadSounds('sounds/sound6.wav', 6);
+  loadSounds('sounds/sound7.wav', 7);
 
   function setupAudioNodes () {
 

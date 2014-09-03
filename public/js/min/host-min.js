@@ -6,7 +6,7 @@ $(function() {
     OT.setLogLevel(2);
     var $window = $(window);
     var userName = "Host";
-    var userNameList = "<%= userNameList %>";
+    console.log(userNameList);
     var TokSettings = function(name, subAud) {
         this.insertMode = "append";
         this.width = 200;
@@ -65,10 +65,17 @@ $(function() {
         average = Math.round(values / length);
         return average;
     }
-    var gainNodes = new Array(9);
-    var sourceNodes = new Array(9);
+    var gainNodes = new Array(8);
+    var sourceNodes = new Array(8);
     setupAudioNodes();
     loadSounds("sounds/sound0.wav", 0);
+    loadSounds("sounds/sound1.wav", 1);
+    loadSounds("sounds/sound2.wav", 2);
+    loadSounds("sounds/sound3.wav", 3);
+    loadSounds("sounds/sound4.wav", 4);
+    loadSounds("sounds/sound5.wav", 5);
+    loadSounds("sounds/sound6.wav", 6);
+    loadSounds("sounds/sound7.wav", 7);
     function setupAudioNodes() {
         for (var i = 0; i < 9; i++) {
             sourceNodes[i] = audioContext.createBufferSource();
@@ -99,6 +106,7 @@ $(function() {
     }
     var volState = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
     var sub = new Array(9);
+    var archiveID = null;
     session.on("streamCreated", function(event) {
         var joinerName = event.stream.name;
         var settings = new TokSettings(joinerName, false);
@@ -111,29 +119,42 @@ $(function() {
         var publisher = OT.initPublisher("serverVid", settings);
         session.publish(publisher);
     });
+    session.on("archiveStarted", function(event) {
+        archiveID = event.id;
+        console.log("ARCHIVE STARTED");
+    });
+    session.on("archiveStopped", function(event) {
+        archiveID = null;
+        console.log("ARCHIVE STOPPED");
+    });
     socket.on("user joined", function(data) {
         userNameList = data.userNameList;
     });
     socket.on("user left", function(data) {
         userNameList = data.userNameList;
     });
-    socket.on("user hovOn", function(data) {
-        data = Number(data);
-        $("#user" + data).css("background", "red");
-        if (userNameList[data] === null) {
-            gainNodes[data].gain.value = 1;
+    socket.on("user hovOn", function(hoverNum) {
+        hoverNum = Number(hoverNum);
+        $("#user" + hoverNum).css("background", "red");
+        if (userNameList[hoverNum] === null || undefined || ",") {
+            gainNodes[hoverNum].gain.value = 1;
         } else {
-            sub[data].subscribeToAudio(true);
-            sub[data].setAudioVolume(100);
+            try {
+                sub[hoverNum].subscribeToAudio(true);
+                sub[hoverNum].setAudioVolume(100);
+            } catch (e) {
+                console.log(e);
+            }
         }
     });
-    socket.on("user hovOff", function(data) {
-        data = Number(data);
-        $("#user" + data).css("background", "lightgrey");
-        if (userNameList[data] === null) {
-            gainNodes[data].gain.value = 0;
-        } else {
-            sub[data].setAudioVolume(0);
+    socket.on("user hovOff", function(hoverNum) {
+        $("#user" + hoverNum).css("background", "lightgrey");
+        gainNodes[hoverNum].gain.value = 0;
+        if (userNameList[hoverNum] !== null) {
+            try {
+                sub[hoverNum].subscribeToAudio(false);
+                sub[hoverNum].setAudioVolume(0);
+            } catch (e) {}
         }
     });
 });

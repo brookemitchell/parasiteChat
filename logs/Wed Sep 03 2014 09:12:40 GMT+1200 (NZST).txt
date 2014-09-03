@@ -1,0 +1,10 @@
+Wed Sep 03 2014 09:16:35 : 0 loop on
+Wed Sep 03 2014 09:16:35 : 0 off
+Wed Sep 03 2014 09:16:41 : 0 loop on
+Wed Sep 03 2014 09:16:45 : 0 off
+Wed Sep 03 2014 09:16:46 : 1 loop on
+Wed Sep 03 2014 09:16:46 : 1 off
+Wed Sep 03 2014 09:16:47 : 2 loop on
+Wed Sep 03 2014 09:16:47 : 2 off
+Wed Sep 03 2014 09:16:49 GMT+1200 (NZST): 7 archive on
+Wed Sep 03 2014 09:16:51 : 7 off
