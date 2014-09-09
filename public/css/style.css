@@ -108,7 +108,7 @@ ul {
 
 /* Messages */
 .chatArea {
-  width: 59%;
+  width: 44%;
   height: 89.8%;
 }
 
@@ -116,7 +116,7 @@ ul {
   height: 100%;
   padding: 0px 0px 0px 3.5%;
   margin-bottom: 0px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .messageBody {
@@ -161,24 +161,48 @@ ul {
   height: 93.6%;
 }
 
-.userVideoBox #serverVidBox {
+.userVideoBox {
   top: 25%;
   height: 87%;
 }
 
-.vidBox, #serverVidBox {
+.vidBox {
   height: 136px;
   width: 232px;
-  float: left;
   background: lightgrey;
   border-style: solid;
   border-width: .1px;
   margin: .3px;
+  position: absolute;
+}
+
+.left {
+  left: -39.1%;
+}
+
+.centre {
+  left: 7.6%;
+}
+
+.right {
+  left: 54.29%;
+}
+
+.top {
+  top: 0;
+}
+
+.mid {
+  top: 36.5%;
+}
+
+.bot {
+  top: 73%;
 }
 
 #serverVidBox {
-  position: fixed;
-  top: 0;
-  left: 40.67%;
-  width: 229px;
+  width: 320px;
+  height: 240px;
+  background-color: #EEF;
+  position: relative;
 }

@@ -10,6 +10,8 @@
     "ejs": "^1.0.0",
     "express": "3.4.8",
     "firebase": "^1.0.18",
-    "opentok": "^2.2.3"
+    "johnny-five": "^0.8.9",
+    "opentok": "^2.2.3",
+    "socket.io": "^1.1.0"
   }
 }

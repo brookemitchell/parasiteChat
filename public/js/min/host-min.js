@@ -104,8 +104,8 @@ $(function() {
             console.log(error);
         }
     }
-    var volState = [ 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
-    var sub = new Array(9);
+    var volState = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
+    var sub = new Array(8);
     var archiveID = null;
     session.on("streamCreated", function(event) {
         var joinerName = event.stream.name;

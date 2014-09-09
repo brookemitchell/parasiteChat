@@ -22,7 +22,10 @@ $(function() {
         showSettingsButton: false,
         showMicButton: false
       };
+  var layoutContainer = document.getElementById("serverVidBox");
 
+  // Initialize the layout container and get a reference to the layout method
+  var layout = TB.initLayoutContainer(layoutContainer).layout;
 
 // TokBox Settings constructor
   var TokSettings = function ( name , resolution, audio ) {
@@ -339,7 +342,7 @@ $(function() {
   //Hover Events
    //Emit an event to the server whenever a client hovers over a user video box.
    $('.vidBox').hover( function(){
-     $( this ).css( 'background', 'red');
+     $( this ).css( 'background', '#53BF5C');
      socket.emit('hoverOn', this.id.charAt(4));
    },
     function( ){

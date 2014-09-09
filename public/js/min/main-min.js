@@ -17,6 +17,8 @@ $(function() {
         showSettingsButton: false,
         showMicButton: false
     };
+    var layoutContainer = document.getElementById("serverVidBox");
+    var layout = TB.initLayoutContainer(layoutContainer).layout;
     var TokSettings = function(name, resolution, audio) {
         this.insertMode = "append";
         this.frameRate = 15;
@@ -230,7 +232,7 @@ $(function() {
         $inputMessage.focus();
     });
     $(".vidBox").hover(function() {
-        $(this).css("background", "red");
+        $(this).css("background", "#53BF5C");
         socket.emit("hoverOn", this.id.charAt(4));
     }, function() {
         $(this).css("background", "lightgrey");
@@ -270,7 +272,6 @@ $(function() {
         addParticipantsMessage(data);
         removeChatTyping(data);
         $(".usersNum").hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
-        $("#meter" + userNameList.indexOf(data.userName)).attr("value", 0);
     });
     socket.on("typing", function(data) {
         addChatTyping(data);

@@ -130,19 +130,19 @@ $(function() {
       gainNodes[i].gain.value = 0;
     }
   }
+
   //load sounds
   function loadSounds( url, index){
-
     var request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.responseType = 'arraybuffer';
     request.onload = function () {
-      //when loadeed decode deeta
-      audioContext.decodeAudioData(request.response, function (buffer) {
+    //when loadeed decode deeta
+    audioContext.decodeAudioData(request.response, function (buffer) {
         playSound(buffer);
       } , onError);
     };
-      request.send();
+    request.send();
 
     function playSound ( buffer ) {
       //when audio is decoded play da sound
@@ -156,10 +156,9 @@ $(function() {
     }
   }
 
-  var volState = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-  var sub = new Array(9);
+  var volState = [0, 0, 0, 0, 0, 0, 0, 0];
+  var sub = new Array(8);
   var archiveID = null;
-
 
   session.on("streamCreated", function(event) {
     var joinerName = event.stream.name;
