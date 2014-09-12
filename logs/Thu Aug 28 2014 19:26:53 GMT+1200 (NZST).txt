@@ -1,6 +1,0 @@
-Thu Aug 28 2014 19:26:59 : 4 loop on
-Thu Aug 28 2014 19:26:59 : 4 off
-Thu Aug 28 2014 19:26:59 : 3 loop on
-Thu Aug 28 2014 19:26:59 : 3 off
-Thu Aug 28 2014 19:26:59 : 3 loop on
-Thu Aug 28 2014 19:27:00 : 3 off
