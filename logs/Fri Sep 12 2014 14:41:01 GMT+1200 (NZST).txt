@@ -1,0 +1,16 @@
+Fri Sep 12 2014 14:41:33 : 1 loop on
+Fri Sep 12 2014 14:41:33 : 1 off
+Fri Sep 12 2014 14:41:33 : 0 loop on
+Fri Sep 12 2014 14:41:33 : 0 off
+Fri Sep 12 2014 14:42:05 : 0 loop on
+Fri Sep 12 2014 14:42:05 : 0 off
+Fri Sep 12 2014 14:42:07 : 1 loop on
+Fri Sep 12 2014 14:42:07 : 1 off
+Fri Sep 12 2014 14:42:07 : 0 loop on
+Fri Sep 12 2014 14:42:07 : 0 off
+Fri Sep 12 2014 14:55:39 : 1 loop on
+Fri Sep 12 2014 14:55:39 : 1 off
+Fri Sep 12 2014 14:55:39 : 0 loop on
+Fri Sep 12 2014 14:55:39 : 0 off
+Fri Sep 12 2014 14:56:12 : 2 loop on
+Fri Sep 12 2014 14:56:13 : 2 off

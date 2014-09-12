@@ -6,6 +6,10 @@ $(function() {
     OT.setLogLevel(2);
     var $window = $(window);
     var userName = "Host";
+    if (userNameList.length > 7) {
+        userNameList = userNameList.split(",");
+    } else userNameList = new Array(8);
+    console.log(typeof userNameList);
     console.log(userNameList);
     var TokSettings = function(name, subAud) {
         this.insertMode = "append";
@@ -129,14 +133,18 @@ $(function() {
     });
     socket.on("user joined", function(data) {
         userNameList = data.userNameList;
+        console.log(userNameList);
     });
     socket.on("user left", function(data) {
         userNameList = data.userNameList;
+        console.log(userNameList);
     });
     socket.on("user hovOn", function(hoverNum) {
-        hoverNum = Number(hoverNum);
+        console.log(hoverNum);
         $("#user" + hoverNum).css("background", "red");
-        if (userNameList[hoverNum] === null || undefined || ",") {
+        var user = userNameList[hoverNum];
+        console.log(user);
+        if (!user) {
             gainNodes[hoverNum].gain.value = 1;
         } else {
             try {
@@ -150,7 +158,7 @@ $(function() {
     socket.on("user hovOff", function(hoverNum) {
         $("#user" + hoverNum).css("background", "lightgrey");
         gainNodes[hoverNum].gain.value = 0;
-        if (userNameList[hoverNum] !== null) {
+        if (userNameList[hoverNum] !== null || undefined) {
             try {
                 sub[hoverNum].subscribeToAudio(false);
                 sub[hoverNum].setAudioVolume(0);

@@ -1,0 +1,33 @@
+Thu Sep 11 2014 10:32:18 : 5 loop on
+Thu Sep 11 2014 10:32:18 : 5 off
+Thu Sep 11 2014 10:32:18 : 2 loop on
+Thu Sep 11 2014 10:32:18 : 2 off
+Thu Sep 11 2014 10:32:18 : 3 loop on
+Thu Sep 11 2014 10:32:18 : 3 off
+Thu Sep 11 2014 10:32:18 : 0 loop on
+Thu Sep 11 2014 10:32:18 : 0 off
+Thu Sep 11 2014 10:32:18 GMT+1200 (NZST): 1 archive on
+Thu Sep 11 2014 10:32:18 : 1 off
+Thu Sep 11 2014 10:32:18 : 0 loop on
+Thu Sep 11 2014 10:32:18 : 0 off
+Thu Sep 11 2014 10:32:18 GMT+1200 (NZST): 1 archive on
+Thu Sep 11 2014 10:32:18 : 1 off
+Thu Sep 11 2014 10:32:20 GMT+1200 (NZST): 1 archive on
+Thu Sep 11 2014 10:32:20 : 1 off
+Thu Sep 11 2014 10:32:20 : 4 loop on
+Thu Sep 11 2014 10:32:20 : 4 off
+Thu Sep 11 2014 10:32:20 : 7 loop on
+Thu Sep 11 2014 10:32:20 : 7 off
+Thu Sep 11 2014 10:32:20 : 6 loop on
+Thu Sep 11 2014 10:32:21 : 6 off
+Thu Sep 11 2014 10:32:21 : 2 loop on
+Thu Sep 11 2014 10:32:21 : 2 off
+Thu Sep 11 2014 10:32:22 : 0 loop on
+Thu Sep 11 2014 10:32:22 : 0 off
+Thu Sep 11 2014 10:32:24 GMT+1200 (NZST): 1 archive on
+Thu Sep 11 2014 10:32:24 : 1 off
+Thu Sep 11 2014 10:32:24 : 0 loop on
+Thu Sep 11 2014 10:32:24 : 0 off
+Thu Sep 11 2014 10:32:24 : 3 loop on
+Thu Sep 11 2014 10:32:24 : 3 off
+Thu Sep 11 2014 10:32:24 : 2 loop on

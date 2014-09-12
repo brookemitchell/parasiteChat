@@ -14,20 +14,24 @@ $(function() {
 
   // Prompt for setting a username
   var userName = 'Host';
-  // var userNameList = Array(userNameList);
+  if (userNameList.length > 7){
+    userNameList = userNameList.split(',');
+  }
+  else userNameList = new Array (8);
+  console.log( typeof userNameList);
   console.log(userNameList);
 
 // TokBox Settings constructor
   var TokSettings = function ( name , subAud) {
-      // this.audioVolume = volume;
-      this.insertMode = "append";
-      this.width = 200;
-      this.height = 150;
-      this.subscribeToAudio = subAud;
-      // this.subscribeToAudio = true;
-      this.subscribeToVideo = false;
-      this.name  = name;
-    };
+    // this.audioVolume = volume;
+    this.insertMode = "append";
+    this.width = 200;
+    this.height = 150;
+    this.subscribeToAudio = subAud;
+    // this.subscribeToAudio = true;
+    this.subscribeToVideo = false;
+    this.name  = name;
+  };
 
   var socket = io();
   //Audio API Stuff
@@ -44,10 +48,10 @@ $(function() {
   // Attempt to get audio input
   try {
     // monkeypatch getUserMedia
-          navigator.getUserMedia =
-          navigator.getUserMedia ||
-          navigator.webkitGetUserMedia ||
-          navigator.mozGetUserMedia;
+    navigator.getUserMedia =
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia;
   // ask for an audio input
   navigator.getUserMedia({audio:true, video:true}, gotStream, didntGetStream);
   } catch (e) {
@@ -170,9 +174,9 @@ $(function() {
    });
 
   session.connect(token, function(error) {
-     var settings = new TokSettings (userName, true, 100);
-     var publisher = OT.initPublisher('serverVid', settings);
-     session.publish(publisher);
+    var settings = new TokSettings (userName, true, 100);
+    var publisher = OT.initPublisher('serverVid', settings);
+    session.publish(publisher);
   });
   session.on('archiveStarted', function(event) {
     archiveID = event.id;
@@ -187,40 +191,53 @@ $(function() {
   //Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
     userNameList = data.userNameList;
-
+    console.log(userNameList);
   });
+
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
     // $('#meter' + userNameList.indexOf(data.userName)).attr('value', 0);
     userNameList = data.userNameList;
+    console.log(userNameList);
   });
 
   socket.on('user hovOn', function (hoverNum) {
-    hoverNum = Number(hoverNum);
-        // console.log('operating on ' + hoverNum);
-        $( '#user' + hoverNum ).css( 'background', 'red');
-        // console.log(userNameList[hoverNum]);
-        if (userNameList[hoverNum] === null || undefined  || ',') {
-            gainNodes[hoverNum].gain.value = 1;
-        }
-          else{
-            try{
-              sub[hoverNum].subscribeToAudio(true);
-              sub[hoverNum].setAudioVolume(100);
-            }
-            catch (e) {console.log(e);}
-        }
+    console.log(hoverNum);
+    $( '#user' + hoverNum ).css( 'background', 'red');
+    var user = userNameList[hoverNum];
+    console.log(user);
 
+    // if (userNameList[hoverNum] === null || undefined  || ',') {
+    //     gainNodes[hoverNum].gain.value = 1;
+    // }
+    //   else{
+    //     try{
+    //       sub[hoverNum].subscribeToAudio(true);
+    //       sub[hoverNum].setAudioVolume(100);
+    //     }
+    //     catch (e) {console.log(e);}
+    // }
+
+    if (!user){
+        gainNodes[hoverNum].gain.value = 1;
+    }
+    else {
+      try{
+        sub[hoverNum].subscribeToAudio(true);
+        sub[hoverNum].setAudioVolume(100);
+      }
+        catch (e) {console.log(e);}
+      }
   });
+
   socket.on('user hovOff', function (hoverNum) {
     $('#user' + hoverNum).css('background', 'lightgrey');
-      gainNodes[hoverNum].gain.value = 0;
-      if (userNameList[hoverNum] !== null) {
-        try{
-          sub[hoverNum].subscribeToAudio(false);
-          sub[hoverNum].setAudioVolume(0);
-        }catch (e) {}
+    gainNodes[hoverNum].gain.value = 0;
+    if (userNameList[hoverNum] !== null || undefined) {
+      try{
+        sub[hoverNum].subscribeToAudio(false);
+        sub[hoverNum].setAudioVolume(0);
+      }catch (e) {}
     }
   });
 });
-

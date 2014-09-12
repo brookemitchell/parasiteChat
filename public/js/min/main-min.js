@@ -17,8 +17,6 @@ $(function() {
         showSettingsButton: false,
         showMicButton: false
     };
-    var layoutContainer = document.getElementById("serverVidBox");
-    var layout = TB.initLayoutContainer(layoutContainer).layout;
     var TokSettings = function(name, resolution, audio) {
         this.insertMode = "append";
         this.frameRate = 15;
@@ -235,7 +233,7 @@ $(function() {
         $(this).css("background", "#53BF5C");
         socket.emit("hoverOn", this.id.charAt(4));
     }, function() {
-        $(this).css("background", "lightgrey");
+        $(this).css("background", "snow");
         socket.emit("hoverOff", this.id.charAt(4));
     });
     socket.on("login", function(data) {
@@ -283,7 +281,7 @@ $(function() {
         $("#user" + data).css("background", "red");
     });
     socket.on("user hovOff", function(data) {
-        $("#user" + data).css("background", "lightgrey");
+        $("#user" + data).css("background", "15C4C4D5");
     });
     socket.on("userVol", function(array) {
         $("#meter" + array[0]).attr("value", array[1]);

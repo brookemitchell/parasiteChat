@@ -119,8 +119,10 @@ ul {
 /* Messages */
 
 .chatArea {
-  width:  44%;
-  height: 89.8%
+  width:  45%;
+  height: 89.8%;
+  position: relative;
+  float: left;
 
 }
 
@@ -153,7 +155,7 @@ ul {
   bottom: 0;
   left: 0;
   padding: 0.3% 0 0.2% 0;
-  border-top: 0.1px solid black;
+  border-top: 0.1em solid lightgrey;
   background: white;
 }
 
@@ -170,9 +172,9 @@ ul {
 .videoArea {
   margin: 0;
   position: absolute;
-  top: 0;
+  top: 1%;
   right: 0.7%;
-  width: 39.7%;
+  width: 55.7%;
   height: 93.6%;
 }
 
@@ -181,38 +183,40 @@ ul {
   height: 87%;
 }
 
-.vidBox {
-  height: 136px;
-  width: 232px;
-  background: lightgrey;
+.vidBox, #serverVidBox {
+  height: 33%;
+  width: 33%;
+  background: snow;
   border-style: solid;
-  border-width: .1px;
+  border-width: .05em;
   margin: .3px;
   position: absolute;
+  overflow: hidden;
+  border-radius: 7%;
 }
 .left{
-  left: -39.1%;
+  left: 0;
 }
 .centre {
-  left: 7.6%;
+  left: 33.3%;
 }
 .right{
-  left: 54.29%;
+  left: 66.6%;
 }
 .top{
   top: 0;
 }
 .mid{
-  top: 36.5%;
+  top: 33.3%;
 }
 .bot{
-  top: 73%;
+  top: 66.6%;
 }
 
 #serverVidBox {
-  // position: fixed;
-  width: 320px;
-  height: 240px;
-  background-color: #EEF;
-  position:relative;
+  // // position: fixed;
+  // width: 320px;
+  // height: 240px;
+  // background-color: #EEF;
+  // position:relative;
 }

@@ -22,10 +22,6 @@ $(function() {
         showSettingsButton: false,
         showMicButton: false
       };
-  var layoutContainer = document.getElementById("serverVidBox");
-
-  // Initialize the layout container and get a reference to the layout method
-  var layout = TB.initLayoutContainer(layoutContainer).layout;
 
 // TokBox Settings constructor
   var TokSettings = function ( name , resolution, audio ) {
@@ -153,6 +149,7 @@ $(function() {
   function setUserName () {
     userName = cleanInput($userNameInput.val().trim());
 
+    console.log(numUsers);
     // If the username is valid
     if (userName) {
 
@@ -164,6 +161,10 @@ $(function() {
       // Tell the server your username
       socket.emit('add user', userName);
         }
+        // else if (numUsers > 7){
+        //   // $('.usersUpdate').append('<br><p>Sorry the Room is Full</p>');
+
+        // }
     }
 
   // Sends a chat message
@@ -346,7 +347,7 @@ $(function() {
      socket.emit('hoverOn', this.id.charAt(4));
    },
     function( ){
-     $( this ).css( 'background', 'lightgrey');
+     $( this ).css( 'background', 'snow');
      socket.emit('hoverOff', this.id.charAt(4));
     });
 
@@ -389,10 +390,13 @@ $(function() {
     log(data.userName + ' joined');
     addParticipantsMessage(data);
     userNameList = data.userNameList;
+    numUsers = data.numUsers;
     console.log(userNameList);
+    console.log(numUsers);
 
     //B: login page update
-    $('.usersNum').hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
+    // $('.usersNum').hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
+    $('.usersNum').hide().fadeIn(FADE_TIME * 2).html(numUsers);
   });
 
   // Whenever the server emits 'user left', log it in the chat body
@@ -400,7 +404,9 @@ $(function() {
     log(data.userName + ' left');
     addParticipantsMessage(data);
     removeChatTyping(data);
+    numUsers = data.numUsers;
     $('.usersNum').hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
+    $('.usersNum').hide().fadeIn(FADE_TIME * 2).html(numUsers);
     // $('#meter' + userNameList.indexOf(data.userName)).attr('value', 0);
   });
 
@@ -418,7 +424,7 @@ $(function() {
     $( '#user' + data ).css( 'background', 'red');
   });
   socket.on('user hovOff', function (data) {
-     $( '#user' + data ).css( 'background', 'lightgrey');
+     $( '#user' + data ).css( 'background', 'snow');
   });
   socket.on('userVol', function(array){
     $('#meter' + array[0]).attr('value', array[1]);
