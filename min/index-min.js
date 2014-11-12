@@ -14,6 +14,12 @@ var Firebase = require("firebase");
 
 var OpenTok = require("opentok");
 
+var fs = require("fs");
+
+var date = new Date();
+
+var loggi = fs.createWriteStream("logs/" + date.toLocaleString() + ".txt");
+
 var messagesRef = new Firebase("https://parasite.firebaseio.com/");
 
 var opentok = new OpenTok("44919541", "0ab0fe6e4c0241b1c04b772d4468191d937e84e8");
@@ -24,9 +30,7 @@ var apiKey = "44919541";
 
 var token;
 
-var board = new five.Board({
-    repl: false
-});
+var hoverNums = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 server.listen(port, function() {
     console.log("Server listening at port %d", port);
@@ -36,7 +40,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.set("view engine", "ejs");
 
-var userNameList = new Array(9);
+var userNameList = new Array(8);
 
 var numUsers = 0;
 
@@ -52,12 +56,31 @@ app.get("/", function(req, res) {
 });
 
 app.get("/host", function(req, res) {
-    token = opentok.generateToken(sessionId);
+    token = opentok.generateToken(sessionId, {
+        role: "moderator"
+    });
     res.render("host.ejs", {
         apiKey: apiKey,
         sessionId: sessionId,
         token: token,
         userNameList: userNameList
+    });
+});
+
+app.get("/start", function(req, res) {
+    opentok.startArchive(app.get("sessionId"), {
+        name: "Node Archiving Sample App"
+    }, function(err, archive) {
+        if (err) return res.send(500, "Could not start archive for session " + sessionId + ". error=" + err.message);
+        res.json(archive);
+    });
+});
+
+app.get("/stop/:archiveId", function(req, res) {
+    var archiveId = req.param("archiveId");
+    opentok.stopArchive(archiveId, function(err, archive) {
+        if (err) return res.send(500, "Could not stop archive " + archiveId + ". error=" + err.message);
+        res.json(archive);
     });
 });
 
@@ -101,6 +124,13 @@ io.on("connection", function(socket) {
             numUsers: numUsers,
             userNameList: userNameList
         });
+        var arcTime = new Date();
+        opentok.startArchive(sessionId, {
+            name: userNameList.indexOf(socket.userName) + ": " + arcTime.toLocaleString().slice(0, -15)
+        }, function(err, archive) {
+            if (err) return console.log(err);
+            console.log("new archive:" + archive.id);
+        });
     });
     socket.on("typing", function() {
         socket.broadcast.emit("typing", {
@@ -120,14 +150,26 @@ io.on("connection", function(socket) {
                 userName: socket.userName,
                 numUsers: numUsers
             });
+            socket.broadcast.emit("user hovOff", userNameList.indexOf(socket.userName));
         }
     });
     socket.on("hoverOn", function(hoverNum) {
-        led.on();
+        hoverNum = Number(hoverNum);
+        var now = new Date();
+        hoverNums[hoverNum]++;
+        if (hoverNums[hoverNum] === 1) {
+            if (userNameList[hoverNum] === (null || undefined)) {
+                loggi.write(now.toLocaleString().slice(0, -15) + ": " + hoverNum + " loop on\n");
+            } else loggi.write(now.toLocaleString() + ": " + hoverNum + " archive on\n");
+        }
         socket.broadcast.emit("user hovOn", hoverNum);
     });
     socket.on("hoverOff", function(hoverNum) {
-        led.off();
+        now = new Date();
+        hoverNums[hoverNum]--;
+        if (hoverNums[hoverNum] === 0) {
+            loggi.write(now.toLocaleString().slice(0, -15) + ": " + hoverNum + " off\n");
+        }
         socket.broadcast.emit("user hovOff", hoverNum);
     });
     socket.on("inputVol", function(array) {
@@ -136,9 +178,4 @@ io.on("connection", function(socket) {
     socket.on("servInputVol", function(vol) {
         socket.broadcast.emit("servInputVol", vol);
     });
-});
-
-board.on("ready", function() {
-    global.led = new five.Led(13);
-    console.log("ready!");
 });

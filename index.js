@@ -19,7 +19,7 @@ var opentok = new OpenTok('44919541', '0ab0fe6e4c0241b1c04b772d4468191d937e84e8'
 var sessionId = '2_MX40NDkxOTU0MX5-TW9uIEF1ZyAxMSAxNzo1MDo0NCBQRFQgMjAxNH4wLjAxMzQ0NzgyMX5-';
 var apiKey = '44919541';
 var token;
-var hoverNums = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+var hoverNums = [0, 0, 0, 0, 0, 0, 0, 0];
 
 // var board = new five.Board({repl:false});
 

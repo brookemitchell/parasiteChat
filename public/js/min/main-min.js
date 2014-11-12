@@ -105,6 +105,7 @@ $(function() {
     }
     function setUserName() {
         userName = cleanInput($userNameInput.val().trim());
+        console.log(numUsers);
         if (userName) {
             $loginPage.fadeOut();
             $chatPage.show();
@@ -136,7 +137,7 @@ $(function() {
             options.fade = false;
             $typingMessages.remove();
         }
-        var $userNameDiv = $('<span class="userName"/>').text(data.userName).css("color", getUserNameColor(data.userName));
+        var $userNameDiv = $('<span class="userName "/>').text(data.userName).css("color", getUserNameColor(data.userName));
         var $messageBodyDiv = $('<span class="messageBody">').text(data.message);
         var typingClass = data.typing ? "typing" : "";
         var $messageDiv = $('<li class="message"/>').data("userName", data.userName).addClass(typingClass).append($userNameDiv, $messageBodyDiv);
@@ -262,14 +263,18 @@ $(function() {
         log(data.userName + " joined");
         addParticipantsMessage(data);
         userNameList = data.userNameList;
+        numUsers = data.numUsers;
         console.log(userNameList);
-        $(".usersNum").hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
+        console.log(numUsers);
+        $(".usersNum").hide().fadeIn(FADE_TIME * 2).html(numUsers);
     });
     socket.on("user left", function(data) {
         log(data.userName + " left");
         addParticipantsMessage(data);
         removeChatTyping(data);
+        numUsers = data.numUsers;
         $(".usersNum").hide().fadeIn(FADE_TIME * 2).html(data.numUsers);
+        $(".usersNum").hide().fadeIn(FADE_TIME * 2).html(numUsers);
     });
     socket.on("typing", function(data) {
         addChatTyping(data);
@@ -281,7 +286,7 @@ $(function() {
         $("#user" + data).css("background", "red");
     });
     socket.on("user hovOff", function(data) {
-        $("#user" + data).css("background", "15C4C4D5");
+        $("#user" + data).css("background", "snow");
     });
     socket.on("userVol", function(array) {
         $("#meter" + array[0]).attr("value", array[1]);

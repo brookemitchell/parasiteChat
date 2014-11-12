@@ -201,7 +201,7 @@ $(function() {
       $typingMessages.remove();
     }
 
-    var $userNameDiv = $('<span class="userName"/>')
+    var $userNameDiv = $('<span class="userName "/>')
       .text(data.userName)
       .css('color', getUserNameColor(data.userName));
     var $messageBodyDiv = $('<span class="messageBody">')
@@ -365,10 +365,10 @@ $(function() {
     //Add number of users to log. BM: remove this?
     addParticipantsMessage(data);
     userNameList = data.userNameList;
-    console.log(userName);
-    console.log(userNameList);
-    stairNumber = (userNameList).indexOf(userName);
-    console.log(stairNumber);
+    // console.log(userName);
+    // console.log(userNameList);
+    // stairNumber = (userNameList).indexOf(userName);
+    // console.log(stairNumber);
 
     // connect TokBox
     session.connect(token, function(error) {
